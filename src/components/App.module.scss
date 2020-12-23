@@ -1,0 +1,19 @@
+.root {
+  background-color: #0f0f1b;
+  height: 100%;
+}
+
+.Paper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.Icon {
+  width: 70px;
+  margin-right: -20px;
+}
