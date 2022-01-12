@@ -1,4 +1,4 @@
-import Confetti from "react-confetti";
+// import Confetti from "react-confetti";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 
@@ -12,19 +12,18 @@ export default function CustomDialog({ isOpen, handleDialogOpen }) {
       onClose={() => handleDialogOpen(false)}
     >
       <div className={styles.InnerDialog}>
-        <Confetti
+        {/* <Confetti
           width={window.matchMedia("(max-width: 500px)").matches ? 235 : 435}
           height={window.matchMedia("(max-width: 500px)").matches ? 335 : 265}
           gravity={0.3}
           run={this.state.animationDone}
-          numberOfPieces={400}
-        />
-        <h2 className={styles.Title}>Успех!</h2>
+          numberOfPieces={100}
+        /> */}
+        <h2 className={styles.Title}>Готово!</h2>
         <p className={styles.DialogContent}>
           Ваше поздравление успешно сохранено!
           <br />
-          Смотри с надеждой в ночную синь, некрепко ладонь сжимай, и всё, о чём
-          мечталось, проси, pагадывай и желай.
+          С наступающим &#11088;
         </p>
         <Button
           fullWidth
