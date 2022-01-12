@@ -27,6 +27,9 @@ export default function Profile({ session }) {
 
     const charsAmount = 250 - e.target.value.length;
     prop === "congrats" && setRemChars(charsAmount);
+
+
+    console.log('handleUserValuesChange')
   };
 
   const onFileChange = (e) =>
@@ -113,7 +116,7 @@ export default function Profile({ session }) {
               multiline={true}
               rows={6}
               value={userValues.userCongrats}
-              inputProps={{ maxLength: 12 }}
+              inputProps={{ maxLength: 250 }}
               onChange={handleUserValuesChange("congrats")}
             />
           )}
