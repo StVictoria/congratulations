@@ -6,6 +6,7 @@ import SubmitButton from "../common/Button";
 import PasswordField from "../common/PasswordField";
 import PooledFields from "../common/PooledFields";
 import CustomField from "../common/CustomField";
+import ChangePageButton from "../common/ChangePageButton";
 
 export default function Registration({ handleSubmit }) {
   const [userValues, setUserValues] = useState({
@@ -57,6 +58,10 @@ export default function Registration({ handleSubmit }) {
     <>
       <h1>Регистрация</h1>
       <Form onSubmit={handleSubmit} render={renderForm} />
+      <ChangePageButton
+        preText="Уже есть аккаунт?"
+        text="Войти"
+      />
     </>
   );
 }

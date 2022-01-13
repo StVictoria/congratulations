@@ -1,4 +1,5 @@
 import { useState } from "preact/hooks";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Snowfall from "react-snowfall";
 import { StylesProvider, ThemeProvider } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
@@ -9,7 +10,6 @@ import ChristmasIcon from "../assets/icons/santa-claus.svg";
 import Auth from "./auth/Auth";
 import Registration from "./registration/Registration";
 import Profile from "./profile/Profile";
-import ChangePage from "./common/ChangePageButton";
 import { THEME } from "../styles/theme";
 
 const session = { login: "login@login", firstName: "Иван", lastName: "Иванов" };
@@ -18,7 +18,6 @@ export default function App() {
   const [isAuth, setAuth] = useState(
     JSON.parse(window.localStorage.getItem("session"))
   );
-  const [isReg, setReg] = useState(true);
 
   const handleAuthSubmit = (values) => {
     setAuth(session);
@@ -30,45 +29,50 @@ export default function App() {
   const handleRegSubmit = (values) =>
     console.log("Зарегистрирован пользователь", values);
 
-  const handleChangeAuthPage = () => setReg(!isReg);
-
   return (
     <StylesProvider injectFirst>
       <ThemeProvider theme={THEME}>
-        <div class={styles.root}>
-          <Snowfall />
-          <Container component="main" maxWidth="xs">
-            <CssBaseline />
-            <div className={styles.Paper}>
-              <img
-                src={ChristmasIcon}
-                alt="christmas"
-                className={styles.Icon}
-              />
-              {!isAuth && !isReg ? (
-                <>
-                  <Registration handleSubmit={handleRegSubmit} />
-                  <ChangePage
-                    preText="Уже есть аккаунт?"
-                    text="Войти"
-                    handleChangePage={handleChangeAuthPage}
+        <BrowserRouter>
+          <div class={styles.root}>
+            <Snowfall />
+            <Container component="main" maxWidth="xs">
+              <CssBaseline />
+              <div className={styles.Paper}>
+                <img
+                  src={ChristmasIcon}
+                  alt="christmas"
+                  className={styles.Icon}
+                />
+                <Routes>
+                  <Route
+                    path="/registration"
+                    element={<Registration handleSubmit={handleRegSubmit} />}
                   />
-                </>
-              ) : !isAuth && isReg ? (
-                <>
-                  <Auth handleSubmit={handleAuthSubmit} session={isAuth} />
-                  <ChangePage
-                    preText="Нет аккаунта?"
-                    text="Зарегистрироваться"
-                    handleChangePage={handleChangeAuthPage}
+                  <Route
+                    path="/auth"
+                    element={
+                      <Auth handleSubmit={handleAuthSubmit} session={isAuth} />
+                    }
                   />
-                </>
-              ) : (
-                <Profile session={isAuth} />
-              )}
-            </div>
-          </Container>
-        </div>
+                  <Route
+                    path="/profile"
+                    element={<Profile session={isAuth} />}
+                  />
+                  <Route
+                    path="*"
+                    element={
+                      isAuth ? (
+                        <Navigate to="/profile" />
+                      ) : (
+                        <Navigate to="/auth" />
+                      )
+                    }
+                  />
+                </Routes>
+              </div>
+            </Container>
+          </div>
+        </BrowserRouter>
       </ThemeProvider>
     </StylesProvider>
   );

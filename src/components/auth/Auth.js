@@ -5,6 +5,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import SubmitButton from "../common/Button";
 import PasswordField from "../common/PasswordField";
 import CustomField from "../common/CustomField";
+import ChangePageButton from "../common/ChangePageButton";
 
 export default function Auth({ handleSubmit }) {
   const [userValues, setUserValues] = useState({
@@ -58,6 +59,7 @@ export default function Auth({ handleSubmit }) {
     <>
       <h1>Вход</h1>
       <Form onSubmit={handleSubmit} render={renderForm} />
+      <ChangePageButton preText="Нет аккаунта?" text="Зарегистрироваться" />
     </>
   );
 }

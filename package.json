@@ -29,6 +29,7 @@
     "preact-render-to-string": "^5.1.4",
     "react-confetti": "^6.0.0",
     "react-final-form": "^6.5.7",
+    "react-router-dom": "^6.2.1",
     "react-snowfall": "^1.0.2",
     "sass": "^1.29.0",
     "sass-loader": "^10.1.0"
