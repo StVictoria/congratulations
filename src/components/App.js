@@ -12,16 +12,19 @@ import Registration from "./registration/Registration";
 import Profile from "./profile/Profile";
 import { THEME } from "../styles/theme";
 
-const session = { login: "login@login", firstName: "Иван", lastName: "Иванов" };
-
 export default function App() {
   const [isAuth, setAuth] = useState(
     JSON.parse(window.localStorage.getItem("session"))
   );
+  const [authValues, setAuthValues] = useState({
+    login: "",
+    password: "",
+    showPassword: false,
+  });
 
   const handleAuthSubmit = (values) => {
-    setAuth(session);
-    window.localStorage.setItem("session", JSON.stringify(session));
+    setAuth(authValues);
+    window.localStorage.setItem("session", JSON.stringify(authValues));
     values.checkbox &&
       window.localStorage.setItem("isRemember", JSON.stringify(true));
   };
@@ -51,7 +54,12 @@ export default function App() {
                   <Route
                     path="/auth"
                     element={
-                      <Auth handleSubmit={handleAuthSubmit} session={isAuth} />
+                      <Auth
+                        handleSubmit={handleAuthSubmit}
+                        session={isAuth}
+                        authValues={authValues}
+                        onSetAuthValues={setAuthValues}
+                      />
                     }
                   />
                   <Route
