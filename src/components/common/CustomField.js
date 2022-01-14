@@ -14,11 +14,12 @@ export default function CustomField({
       <Field
         name={name}
         initialValue={login}
-        render={({ input }) => (
+        render={({ input, meta }) => (
           <TextField
             {...input}
             required
             fullWidth
+            error={(meta.error || meta.submitError) && meta.touched}
             label={label}
             type={type}
             variant="filled"

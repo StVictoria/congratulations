@@ -10,33 +10,33 @@ const fieldsValues = [
 export default function PooledFields({ userValues, handleChange }) {
   return (
     <>
-      {fieldsValues.map((field) => (
-        <Grid item xs={12} sm={6}>
-          <Field
-            name={field.name}
-            initialValue={
-              field.name === "firstName"
-                ? userValues.firstName
-                : userValues.lastName
-            }
-            render={({ input }) => (
-              <TextField
-                {...input}
-                required
-                fullWidth
-                label={field.label}
-                variant="filled"
-                value={
-                  field.name === "firstName"
-                    ? userValues.firstName
-                    : userValues.lastName
-                }
-                onChange={handleChange(`${field.name}`)}
-              />
-            )}
-          />
-        </Grid>
-      ))}
+      {fieldsValues.map((field) => {
+        const isFirstName = field.name === "firstName";
+        return (
+          <Grid item xs={12} sm={6}>
+            <Field
+              name={field.name}
+              initialValue={
+                isFirstName ? userValues.firstName : userValues.lastName
+              }
+              render={({ input, meta }) => (
+                <TextField
+                  {...input}
+                  required
+                  fullWidth
+                  error={(meta.error || meta.submitError) && meta.touched}
+                  label={field.label}
+                  variant="filled"
+                  value={
+                    isFirstName ? userValues.firstName : userValues.lastName
+                  }
+                  onChange={handleChange(`${field.name}`)}
+                />
+              )}
+            />
+          </Grid>
+        );
+      })}
     </>
   );
 }

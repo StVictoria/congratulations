@@ -7,7 +7,12 @@ import PasswordField from "../common/PasswordField";
 import CustomField from "../common/CustomField";
 import ChangePageButton from "../common/ChangePageButton";
 
-export default function Auth({ session, handleSubmit, authValues, onSetAuthValues }) {
+export default function Auth({
+  session,
+  handleSubmit,
+  authValues,
+  onSetAuthValues,
+}) {
   if (session) {
     return <Navigate to="/profile" />;
   }
