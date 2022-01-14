@@ -6,14 +6,14 @@ export default function CustomField({
   name,
   label,
   type,
-  userValues,
+  login,
   handleChange,
 }) {
   return (
     <Grid item xs={12}>
       <Field
         name={name}
-        initialValue={userValues.login}
+        initialValue={login}
         render={({ input }) => (
           <TextField
             {...input}
@@ -22,7 +22,7 @@ export default function CustomField({
             label={label}
             type={type}
             variant="filled"
-            value={userValues.login}
+            value={login}
             onChange={handleChange(`${name}`)}
           />
         )}

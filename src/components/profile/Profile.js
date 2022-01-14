@@ -1,5 +1,6 @@
 import { useState } from "preact/hooks";
-import { Form, Field } from "react-final-form";
+import { Form, Field} from "react-final-form";
+import { Navigate } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import { ButtonBase } from "@material-ui/core";
@@ -13,14 +14,18 @@ import CustomField from "../common/CustomField";
 
 export default function Profile({ session }) {
   const [userValues, setUserValues] = useState({
-    firstName: session.firstName,
-    lastName: session.lastName,
-    login: session.login,
+    firstName: " ",
+    lastName: " ",
+    login: " ",
     file: "",
     congrats: " ",
   });
   const [remChars, setRemChars] = useState(250);
   const [isDialogOpen, setDialogOpen] = useState(false);
+
+  if (!session) {
+    return <Navigate to='/auth' />
+  }
 
   const handleUserValuesChange = (prop) => (e) => {
     setUserValues({ ...userValues, [prop]: e.target.value });
@@ -54,7 +59,7 @@ export default function Profile({ session }) {
           name="login"
           label="Логин"
           type="email"
-          userValues={userValues}
+          login={userValues.login !== " " ? userValues.login : session.login}
           handleChange={handleUserValuesChange}
         />
 
